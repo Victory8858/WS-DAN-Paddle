@@ -75,21 +75,21 @@ PaddlePaddle == 2.2.0
 ```shell
 Fine-grained
 ├── CUB_200_2011
-	├── images
-	├── images.txt
-	├── image_class_labels.txt
-	├── train_test_split.txt
+    ├── images
+    ├── images.txt
+    ├── image_class_labels.txt
+    ├── train_test_split.txt
 ├── Car
-	├── cars_test
-	├── cars_train
-	├── cars_test_annos_withlabels.mat
-	├── devkit
-		├── cars_train_annos.mat
+    ├── cars_test
+    ├── cars_train
+    ├── cars_test_annos_withlabels.mat
+    ├── devkit
+        ├── cars_train_annos.mat
 ├── fgvc-aircraft-2013b
-	├── data
-		├── variants.txt
-		├── images_variant_trainval.txt
-		├── images_variant_test.txt
+    ├── data
+        ├── variants.txt
+        ├── images_variant_trainval.txt
+        ├── images_variant_test.txt
 ```
 
 <a name="33"></a>
