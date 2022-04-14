@@ -1,3 +1,9 @@
+"""
+- @Author: GaoDing
+- @Date: 2022/04/14 10:00
+- @Description: Inceptionv3模型及预训练权重加载
+"""
+
 import logging
 import paddle
 import paddle.nn as nn

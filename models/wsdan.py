@@ -1,3 +1,9 @@
+"""
+- @Author: GaoDing
+- @Date: 2022/04/14 10:00
+- @Description: WS-DAN模型
+"""
+
 import numpy as np
 import paddle
 import paddle.nn as nn

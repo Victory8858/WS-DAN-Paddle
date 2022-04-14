@@ -1,3 +1,9 @@
+"""
+- @Author: GaoDing
+- @Date: 2022/04/14 10:00
+- @Description: BAP模型
+"""
+
 import paddle
 import paddle.nn.functional as F
 
