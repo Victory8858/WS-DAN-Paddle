@@ -99,7 +99,7 @@ Fine-grained
 
 ### 3.3 准备模型
 
-您需要准备Inceptionv3预训练模型权重，该模型用于提取特征图（Feature Map, FM）和注意力图（Attention Map, AM），在训练前，您需要下载[Inceptionv3提取码:1234](链接：https://pan.baidu.com/s/1dO2AG-R0GCc2RYEZqAqSNA )预训练模型参数，并保存到models文件夹下，然后即可训练、测试。
+您需要准备Inceptionv3预训练模型权重，该模型用于提取特征图（Feature Map, FM）和注意力图（Attention Map, AM），在训练前，由于Github无法上传100MB以上文件，该权重参数141MB，所以您需要手动下载[Inceptionv3提取码:1234](链接：https://pan.baidu.com/s/1dO2AG-R0GCc2RYEZqAqSNA )预训练模型参数文件，并保存到models文件夹下，然后即可训练、测试。
 
 <a name="4"></a>
 
