@@ -52,7 +52,7 @@ feature_center = paddle.zeros(shape=[num_classes, config.num_attentions * net.nu
 if config.target_dataset == 'bird':
     net_state_dict = paddle.load("FGVC/bird/ckpt/bird_model89.23.pdparams")  
 if config.target_dataset == 'aircraft':
-    net_state_dict = paddle.load("FGVC/aircraft/ckpt/aircraft_model94.03.pdparams")
+    net_state_dict = paddle.load("FGVC/aircraft/ckpt/aircraft_model94.pdparams")
 if config.target_dataset == 'car':
     net_state_dict = paddle.load("FGVC/car/ckpt/car_model94.88.pdparams")
 net.set_state_dict(net_state_dict)
