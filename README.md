@@ -42,7 +42,7 @@
 
 **aistudio体验教程:** [运行一下](https://aistudio.baidu.com/studio/project/partial/verify/3809770/b93ad25fba8f46768b04289fef877fc8)
 
-**Github复现地址:** [点击查看]([Victory8858/WS-DAN-Paddle (github.com)](https://github.com/Victory8858/WS-DAN-Paddle))
+**Github复现地址:** [点击查看](https://github.com/Victory8858/WS-DAN-Paddle)
 
 ## 2. 数据集和复现精度
 
