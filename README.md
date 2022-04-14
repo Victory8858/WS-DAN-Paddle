@@ -1,7 +1,4 @@
 # WS-DAN-Paddle
-<<<<<<< HEAD
-=======
-
 ## 目录
 
 - [1. 简介]()
@@ -36,15 +33,14 @@
 <div align="center">
     <img src="imgs/WS-DAN.jpg" width=400">
 </div>
-**论文:** [See Better Before Looking Closer: Weakly Supervised Data Augmentation Network for Fine-Grained Visual Classification](https://arxiv.org/pdf/1901.09891.pdf))
+                                         
+**论文:** [See Better Before Looking Closer: Weakly Supervised Data Augmentation Network for Fine-Grained Visual Classification](https://arxiv.org/pdf/1901.09891.pdf)
 
 **参考repo:** [https://github.com/wvinzh/WS_DAN_PyTorch](https://github.com/wvinzh/WS_DAN_PyTorch)
 
 在此非常感谢`wvinzh`等人贡献的[WS_DAN_PyTorch](https://github.com/wvinzh/WS_DAN_PyTorch)，提高了本repo复现论文的效率。
 
-**aistudio体验教程(即将发布):** [运行一下]()
-
-**Github复现地址:** [点击查看](https://aistudio.baidu.com/ibdgpu3/user/320218/3763840/notebooks/3763840.ipynb)
+**aistudio体验教程:** [运行一下](https://aistudio.baidu.com/studio/project/partial/verify/3809770/b93ad25fba8f46768b04289fef877fc8)
 
 ## 2. 数据集和复现精度
 
@@ -162,7 +158,10 @@ config.target_dataset = 'car'  # it can be 'car', 'bird', 'aircraft'
 ```
 如下所示：
 
-![image-20220414120500265](C:\Users\Victory\Desktop\WS-DAN-Paddle-Victory8858\imgs\test.png)
+<div align="center">
+    <img src="imgs/test.png" width=800">
+</div>
+
 
 ## 6. TIPC自动化测试脚本(暂未添加)
 
@@ -176,4 +175,3 @@ config.target_dataset = 'car'  # it can be 'car', 'bird', 'aircraft'
 
 - [WSDAN 论文及代码解读_景唯acr的博客-CSDN博客_wsdan](https://blog.csdn.net/weixin_41735859/article/details/108417343)
 - [GuYuc/WS-DAN.PyTorch: A PyTorch implementation of WS-DAN](https://github.com/GuYuc/WS-DAN.PyTorch)
->>>>>>> 0371ed6 (first commit)

@@ -50,11 +50,11 @@ net = WSDAN(num_classes=num_classes, num_attentions=config.num_attentions, net_n
             pretrained=False)
 feature_center = paddle.zeros(shape=[num_classes, config.num_attentions * net.num_features])
 if config.target_dataset == 'bird':
-    net_state_dict = paddle.load("FGVC/bird/ckpt/bird_model89.23.pdparams")  # 扩大尺寸有利于提高精度改
+    net_state_dict = paddle.load("FGVC/bird/ckpt/bird_model89.23.pdparams")  
 if config.target_dataset == 'aircraft':
-    net_state_dict = paddle.load("FGVC/aircraft/ckpt/aircraft_model93.04.pdparams")  # Inception 预训练需要变为True
+    net_state_dict = paddle.load("FGVC/aircraft/ckpt/aircraft_model93.04.pdparams") 
 if config.target_dataset == 'car':
-    net_state_dict = paddle.load("FGVC/car/ckpt/car_model94.53.pdparams")  # Inception 预训练需要变为True
+    net_state_dict = paddle.load("FGVC/car/ckpt/car_model94.53.pdparams")
 net.set_state_dict(net_state_dict)
 net.eval()
 
