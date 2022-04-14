@@ -1,8 +1,9 @@
 from .aircraft_dataset import AircraftDataset
 from .bird_dataset import BirdDataset
 from .car_dataset import CarDataset
-from .dog_dataset import DogDataset
+
 import config
+
 
 def getDataset(target_dataset, resize):
     if target_dataset == 'aircraft':
@@ -11,7 +12,5 @@ def getDataset(target_dataset, resize):
         return BirdDataset(mode='train', resize=resize), BirdDataset(mode='val', resize=config.image_size)
     elif target_dataset == 'car':
         return CarDataset(mode='train', resize=resize), CarDataset(mode='val', resize=config.image_size)
-    elif target_dataset == 'dog':
-        return DogDataset(mode='train', resize=resize), DogDataset(mode='val', resize=config.image_size)
     else:
         raise ValueError('No Dataset {}'.format(target_dataset))
