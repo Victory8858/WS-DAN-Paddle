@@ -4,7 +4,7 @@
 - @Description: 参数配置文件
 """
 
-# hyper-parameter
+# Hyper Parameter
 workers = 0  # number of Dataloader workers Windows 不支持多进程
 epochs = 80  # number of epochs
 batch_size = 6  # batch size
@@ -17,14 +17,14 @@ net_name = 'inception_mixed_6e'  # feature extractor
 num_attentions = 32  # number of attention maps
 beta = 5e-2  # param for update feature centers
 
-# Dataset/Path Config
+# Dataset Path Config
 target_dataset = 'aircraft'  # options: 'aircraft', 'bird', 'car'
 
-# model save and logging
+# Model and Logging Save Path
 log_name = "train.log"
 save_dir = "C:/Users/Victory/Desktop/WS-DAN-Paddle-Victory8858/FGVC/" + target_dataset + "/ckpt/"  # Windows
 
-# checkpoint model for resume training
+# If Checkpoint
 model_name = "model.pdparams"
-ckpt = False
+ckpt = False  # if want load model to continue trainning
 model_num = 0
