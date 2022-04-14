@@ -141,13 +141,6 @@ def getTransform(resize, mode='train'):
             transforms.ToTensor(),
             transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
         ])
-    # elif mode == 'val' and config.target_dataset == 'bird':
-    #     return transforms.Compose([
-    #         transforms.Resize(size=(int(resize[0] / 0.875), int(resize[1] / 0.875))),
-    #         transforms.CenterCrop(config.input_size),
-    #         transforms.ToTensor(),
-    #         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-    #     ])
     else:
         return transforms.Compose([
             transforms.Resize(size=config.image_size),
