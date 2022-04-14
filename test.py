@@ -18,7 +18,8 @@ config.target_dataset = 'aircraft'  # it can be 'car', 'bird', 'aircraft'
 
 # logging config
 logging.basicConfig(
-    filename=os.path.join(config.save_dir, config.log_name),
+    filename=os.path.join("C:/Users/Victory/Desktop/WS-DAN-Paddle-Victory8858/FGVC/" + config.target_dataset + "/ckpt/",
+                          'test.log'),
     filemode='w',
     format='%(asctime)s: %(levelname)s: [%(filename)s:%(lineno)d]: %(message)s',
     level=logging.INFO)
@@ -50,7 +51,7 @@ net = WSDAN(num_classes=num_classes, num_attentions=config.num_attentions, net_n
             pretrained=False)
 feature_center = paddle.zeros(shape=[num_classes, config.num_attentions * net.num_features])
 if config.target_dataset == 'bird':
-    net_state_dict = paddle.load("FGVC/bird/ckpt/bird_model89.23.pdparams")  
+    net_state_dict = paddle.load("FGVC/bird/ckpt/bird_model89.23.pdparams")
 if config.target_dataset == 'aircraft':
     net_state_dict = paddle.load("FGVC/aircraft/ckpt/aircraft_model94.pdparams")
 if config.target_dataset == 'car':

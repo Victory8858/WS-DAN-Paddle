@@ -21,8 +21,7 @@ beta = 5e-2  # param for update feature centers
 target_dataset = 'aircraft'  # options: 'aircraft', 'bird', 'car'
 
 # Model and Logging Save Path
-log_name = "train.log"
-save_dir = "C:/Users/Victory/Desktop/WS-DAN-Paddle-Victory8858/FGVC/" + target_dataset + "/ckpt/"  # Windows
+save_dir = "C:/Users/Victory/Desktop/WS-DAN-Paddle-Victory8858/FGVC/" + target_dataset + "/ckpt/"  # Windows Path
 
 # If Checkpoint
 model_name = "model.pdparams"
