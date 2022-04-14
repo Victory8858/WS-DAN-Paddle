@@ -11,8 +11,7 @@ from scipy.io import loadmat
 from paddle.io import Dataset
 from utils import getTransform
 
-# DATAPATH = '/home/aistudio/data/CUB-200-2011'       # AI_Studio
-DATAPATH = "E:\\dataset\\Fine-grained\\Car"  # My_3070
+DATAPATH = "E:\\dataset\\Fine-grained\\Car"  # My Dataset Path
 
 
 class CarDataset(Dataset):
@@ -49,6 +48,7 @@ class CarDataset(Dataset):
 
 if __name__ == '__main__':
     import matplotlib.pyplot as plt
+
     ds = CarDataset('train')
     print(len(ds))
     for i in range(0, 10):
