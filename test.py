@@ -14,7 +14,7 @@ from models.wsdan import WSDAN
 from utils import CenterLoss, AverageMeter, TopKAccuracyMetric, batch_augment
 
 # which dataset you want to test
-config.target_dataset = 'bird'  # it can be 'car', 'bird', 'aircraft'
+config.target_dataset = 'car'  # it can be 'car', 'bird', 'aircraft'
 
 # logging config
 logging.basicConfig(
@@ -54,7 +54,7 @@ if config.target_dataset == 'bird':
 if config.target_dataset == 'aircraft':
     net_state_dict = paddle.load("FGVC/aircraft/ckpt/aircraft_model93.04.pdparams") 
 if config.target_dataset == 'car':
-    net_state_dict = paddle.load("FGVC/car/ckpt/car_model94.53.pdparams")
+    net_state_dict = paddle.load("FGVC/car/ckpt/car_model94.88.pdparams")
 net.set_state_dict(net_state_dict)
 net.eval()
 
