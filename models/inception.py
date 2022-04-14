@@ -2,11 +2,7 @@ import logging
 import paddle
 import paddle.nn as nn
 import paddle.nn.functional as F
-import json
 import numpy as np
-
-model_parameters_file_path = 'models/inceptionv3_params.json'
-# model_parameters_file_path = 'inceptionv3_params.json'  # 运行本文件需要这个路径
 
 
 def inception_v3(pretrained=False, **kwargs):
@@ -14,11 +10,8 @@ def inception_v3(pretrained=False, **kwargs):
         if 'transform_input' not in kwargs:
             kwargs['transform_input'] = True
         model = Inception3(**kwargs)
-        # pretrained_dict = paddle.load("../GithubFiles/InceptionV3_pretrained.pdparams")  # 单独运行本文件时要用这个路径
-        pretrained_dict = paddle.load("GithubFiles/InceptionV3_pretrained.pdparams")   # paddlehub自带
-
-        # with open(model_parameters_file_path) as f:  # Pytorch模型参数
-        #     pretrained_dict = json.load(f)
+        # pretrained_dict = paddle.load("InceptionV3_pretrained.pdparams")  # 单独运行本文件时要用这个路径
+        pretrained_dict = paddle.load("models/InceptionV3_pretrained.pdparams")  # paddlehub自带
 
         model.load_state_dict(pretrained_dict)
 
@@ -50,20 +43,6 @@ class Inception3(paddle.nn.Layer):
         self.Mixed_7b = InceptionE(1280)
         self.Mixed_7c = InceptionE(2048)
         self.fc = nn.Linear(2048, num_classes)
-
-        # for m in self.sublayers():
-        #     # print(m)
-        #     if isinstance(m, nn.Conv2D) or isinstance(m, nn.Linear):
-        #         import scipy.stats as stats
-        #         stddev = m.stddev if hasattr(m, 'stddev') else 0.1
-        #         X = stats.truncnorm(-2, 2, scale=stddev)
-        #         values = paddle.to_tensor(X.rvs(m.weight.numel()), dtype=m.weight.dtype)
-        #         values = values.reshape(m.weight.shape)
-        #         with paddle.no_grad():
-        #             m.weight.copy_(values)
-        #     elif isinstance(m, nn.BatchNorm2D):
-        #         m.weight.fill_(1)
-        #         m.bias.zero_()
 
     def forward(self, x):
         if self.transform_input:
@@ -165,44 +144,15 @@ class Inception3(paddle.nn.Layer):
         )
 
     def load_state_dict(self, state_dict, strict=True):
-        ### 之前用的paddlehub的参数
-        model_dict = self.state_dict()
         pretrained_dict = {}
-        # pretrained_dict = {k: v for k, v in state_dict.items()
-        #                    if k in model_dict and model_dict[k].size() == v.size()}
-        model_layers_list = []
-        for layer_name in model_dict:
-            model_layers_list.append(layer_name)
-
+        layers_name = []
+        model_dict = self.state_dict()
+        for k, v in model_dict.items():
+            layers_name.append(k)
         idx = 0
         for k, v in state_dict.items():
-            pretrained_dict[model_layers_list[idx]] = v
+            pretrained_dict[layers_name[idx]] = np.array(v, dtype='float32')
             idx += 1
-
-        ##################### 处理字典key不匹配问题，但无效 Pytorch #####################
-        # pretrained_dict = {}
-        # layers_name = []
-        # model_dict = self.state_dict()
-        # for k, v in model_dict.items():
-        #     layers_name.append(k)
-        #     # pretrained_dict[k] = v
-        #
-        # idx = 0
-        # for k, v in state_dict.items():
-        #     pretrained_dict[layers_name[idx]] = np.array(v, dtype='float32')
-        #     idx += 1
-        #
-        # # pretrained_dict = {k: np.array(v, dtype='float32') for k, v in state_dict.items()
-        # #                    if k in model_dict and model_dict[k].shape == np.array(v).shape}
-        ##################### 处理字典key不匹配问题 #####################
-
-        ##################### 没有解决字典key不匹配问题 #####################
-        # model_dict = self.state_dict()
-        # pretrained_dict = {k: np.array(v, dtype='float32') for k, v in state_dict.items()}
-        # print("model_dict", len(model_dict))
-        # print("pretrained_dict", len(pretrained_dict))
-        # print("state_dict", len(state_dict))
-        ##################### 没有解决字典key不匹配问题 #####################
 
         if len(pretrained_dict) == len(state_dict):
             logging.info('%s: All params loaded' % type(self).__name__)
@@ -210,7 +160,6 @@ class Inception3(paddle.nn.Layer):
             logging.info('%s: Some params were not loaded:' % type(self).__name__)
             not_loaded_keys = [k for k in state_dict.keys() if k not in pretrained_dict.keys()]
             logging.info(('%s, ' * (len(not_loaded_keys) - 1) + '%s') % tuple(not_loaded_keys))
-
         model_dict.update(pretrained_dict)
         super(Inception3, self).set_state_dict(model_dict)
 
@@ -413,34 +362,3 @@ class BasicConv2d(paddle.nn.Layer):
         x = self.conv(x)
         x = self.bn(x)
         return F.relu(x)
-
-
-if __name__ == "__main__":
-    # features = inception_v3(pretrained=True).get_features_mixed_6e()
-    # layers_dict = []
-    model = inception_v3(pretrained=True)
-    state_dict = model.state_dict()
-
-    print(state_dict["Conv2d_1a_3x3.conv.weight"].shape)
-    print(state_dict["Conv2d_1a_3x3.conv.weight"])
-
-    print(state_dict["Conv2d_1a_3x3.bn._mean"].shape)
-    print(state_dict["Conv2d_1a_3x3.bn._mean"])
-
-    print(state_dict["AuxLogits.conv0.conv.weight"].shape)
-    print(state_dict["AuxLogits.conv0.conv.weight"])
-
-    print(state_dict["fc.weight"].shape)
-    print(state_dict["fc.weight"])
-
-    print(state_dict['fc.bias'].shape)
-    print(state_dict['fc.bias'])
-
-    # for k, v in model.state_dict().items():
-    #     print(k)
-    #     break
-
-# for k, v in model.state_dict().items():
-#     layers_dict.append(k)
-#     print(k)
-# print(len(layers_dict))
