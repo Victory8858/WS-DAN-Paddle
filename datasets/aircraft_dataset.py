@@ -47,7 +47,7 @@ class AircraftDataset(Dataset):
         image = Image.open(os.path.join(DATAPATH, 'images', '%s.jpg' % self.images[item])).convert('RGB')
         image = self.transform(image)
 
-        return image, self.labels[item]  # count begin from zero
+        return image, self.labels[item]
 
     def __len__(self):
         return len(self.images)

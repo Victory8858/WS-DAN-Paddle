@@ -1,6 +1,6 @@
 """
 - @Author: GaoDing
-- @Date: 2022/04/10 20:00
+- @Date: 2022/04/14 10:00
 - @Description: 模型训练
 """
 
@@ -13,7 +13,7 @@ import paddle
 from datasets import getDataset
 from paddle.io import DataLoader
 from models.wsdan import WSDAN
-from utils import CenterLoss, AverageMeter, TopKAccuracyMetric, ModelCheckpoint, batch_augment
+from utils import CenterLoss, AverageMeter, TopKAccuracyMetric, batch_augment
 import paddle.nn.functional as F
 
 # 日志输出配置
@@ -157,7 +157,7 @@ for epoch in range(start_epoch, config.epochs):
     end_time = time.time()
 
     # write log for this epoch
-    # logging.info('Train: {}, Time {:3.2f}'.format(batch_info, end_time - start_time))
+    logging.info('Train: {}, Time {:3.2f}'.format(batch_info, end_time - start_time))
 
     # 学习率每两个epoch衰减一次
     scheduler.step()
@@ -195,8 +195,8 @@ for epoch in range(start_epoch, config.epochs):
     batch_info = 'Val Loss {:.4f}, Val Acc ({:.2f}, {:.2f})'.format(epoch_loss, epoch_acc[0], epoch_acc[1])
     pbar.set_postfix_str('{}, {}'.format(logs['train_info'], batch_info))
     # write log for this epoch
-    # logging.info('Valid: {}, Time {:3.2f}'.format(batch_info, end_time - start_time))
-    # logging.info('')
+    logging.info('Valid: {}, Time {:3.2f}'.format(batch_info, end_time - start_time))
+    logging.info('')
     net.train()
     pbar.close()
 
