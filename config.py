@@ -27,6 +27,6 @@ save_dir = "C:/Users/Victory/Desktop/WS-DAN-Paddle-Victory8858/FGVC/" + target_d
 # checkpoint model for resume training
 model_name = "model.pdparams"
 ckpt = False
-model_num = 9
+model_num = 0
 # if ckpt:
 #     ckpt = save_dir + model_name
