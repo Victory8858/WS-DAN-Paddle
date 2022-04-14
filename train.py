@@ -60,12 +60,11 @@ net = WSDAN(num_classes=num_classes, num_attentions=config.num_attentions, net_n
             pretrained=pretrained)
 feature_center = paddle.zeros(shape=[num_classes, config.num_attentions * net.num_features])
 
-# Optimizer, LR Scheduler
+# Optimizer
 scheduler = paddle.optimizer.lr.StepDecay(learning_rate=0.001, step_size=2, gamma=0.9)
-# scheduler = paddle.optimizer.lr.ReduceOnPlateau(learning_rate=0.001, mode='min', patience=3, factor=0.1)
 optimizer = paddle.optimizer.Momentum(learning_rate=scheduler, momentum=0.9, weight_decay=1e-5,
                                       parameters=net.parameters())
-# optimizer = paddle.optimizer.SGD(learning_rate=scheduler, parameters=net.parameters())
+
 
 # 可以加载预先保存的模型以及参数
 if config.ckpt:
