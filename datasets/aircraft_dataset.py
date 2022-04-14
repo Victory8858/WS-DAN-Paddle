@@ -10,10 +10,10 @@ from PIL import Image
 from paddle.io import Dataset
 from utils import getTransform
 
-# DATAPATH = '/home/aistudio/data/CUB-200-2011'       # AI_Studio
-DATAPATH = "E:\\dataset\\Fine-grained\\fgvc-aircraft-2013b\\data"  # My_3070
+DATAPATH = "E:\\dataset\\Fine-grained\\fgvc-aircraft-2013b\\data"  # My Dataset Path
 
 FILENAME_LENGTH = 7
+
 
 class AircraftDataset(Dataset):
     def __init__(self, mode='train', resize=(448, 448)):
@@ -55,6 +55,7 @@ class AircraftDataset(Dataset):
 
 if __name__ == '__main__':
     import matplotlib.pyplot as plt
+
     train_dataset = AircraftDataset(mode='test')
     print(len(train_dataset))
     for i in range(1):

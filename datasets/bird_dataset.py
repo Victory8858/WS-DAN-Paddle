@@ -8,11 +8,9 @@ import os
 from PIL import Image
 from paddle.io import Dataset
 from utils import getTransform
-import paddle
 import numpy as np
 
-# DATAPATH = '/home/aistudio/data/CUB-200-2011'       # AI_Studio
-DATAPATH = "E:\\dataset\\Fine-grained\\CUB_200_2011"  # My_3070
+DATAPATH = "E:\\dataset\\Fine-grained\\CUB_200_2011"  # My Dataset Path
 
 
 class BirdDataset(Dataset):
@@ -53,7 +51,7 @@ class BirdDataset(Dataset):
 
     def __getitem__(self, item):
         current_image_idx = self.image_idx[item]
-        image = Image.open(os.path.join(DATAPATH, 'images', self.image_path[current_image_idx])).convert('RGB')  # C, H, W
+        image = Image.open(os.path.join(DATAPATH, 'images', self.image_path[current_image_idx])).convert('RGB')  # CHW
         image = self.transform(image)
         label = np.int64(self.image_label[current_image_idx] - 1)
 
@@ -69,4 +67,3 @@ if __name__ == '__main__':
     for i in range(10):
         raw_image, image_label = train_dataset[i]
         print(raw_image.shape, image_label)
-
