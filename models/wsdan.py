@@ -63,9 +63,6 @@ class WSDAN(paddle.nn.Layer):
             # Object Localization Am = mean(Ak)
             attention_map = paddle.mean(attention_maps, axis=1, keepdim=True)  # (B, 1, H, W)
 
-        # p: (B, self.num_classes)
-        # feature_matrix: (B, M * C)
-        # attention_map: (B, 2, H, W) in training, (B, 1, H, W) in val/testing
         return p, feature_matrix, attention_map
 
     def load_state_dict(self, state_dict, strict=True):
@@ -81,4 +78,4 @@ class WSDAN(paddle.nn.Layer):
             logging.info(('%s, ' * (len(not_loaded_keys) - 1) + '%s') % tuple(not_loaded_keys))
 
         model_dict.update(pretrained_dict)
-        super(WSDAN, self).load_state_dict(model_dict)
+        super(WSDAN, self).set_state_dict(model_dict)
