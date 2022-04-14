@@ -28,5 +28,3 @@ save_dir = "C:/Users/Victory/Desktop/WS-DAN-Paddle-Victory8858/FGVC/" + target_d
 model_name = "model.pdparams"
 ckpt = False
 model_num = 0
-# if ckpt:
-#     ckpt = save_dir + model_name
