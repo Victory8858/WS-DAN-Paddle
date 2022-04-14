@@ -48,7 +48,6 @@ class CarDataset(Dataset):
 
 if __name__ == '__main__':
     import matplotlib.pyplot as plt
-
     ds = CarDataset('train')
     print(len(ds))
     for i in range(0, 10):
