@@ -40,9 +40,9 @@
 
 在此非常感谢`wvinzh`等人贡献的[WS_DAN_PyTorch](https://github.com/wvinzh/WS_DAN_PyTorch)，提高了本repo复现论文的效率。
 
-**aistudio体验教程(即将发布):** [运行一下](https://aistudio.baidu.com/studio/project/partial/verify/3809770/b93ad25fba8f46768b04289fef877fc8)
+**aistudio体验教程:** [运行一下](https://aistudio.baidu.com/studio/project/partial/verify/3809770/b93ad25fba8f46768b04289fef877fc8)
 
-**Github复现地址:** [点击查看](https://aistudio.baidu.com/ibdgpu3/user/320218/3763840/notebooks/3763840.ipynb)
+**Github复现地址:** [点击查看]([Victory8858/WS-DAN-Paddle (github.com)](https://github.com/Victory8858/WS-DAN-Paddle))
 
 ## 2. 数据集和复现精度
 
