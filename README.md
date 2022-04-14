@@ -33,6 +33,7 @@
 <div align="center">
     <img src="imgs/WS-DAN.jpg" width=400">
 </div>
+                                         
 **论文:** [See Better Before Looking Closer: Weakly Supervised Data Augmentation Network for Fine-Grained Visual Classification](https://arxiv.org/pdf/1901.09891.pdf)
 
 **参考repo:** [https://github.com/wvinzh/WS_DAN_PyTorch](https://github.com/wvinzh/WS_DAN_PyTorch)
