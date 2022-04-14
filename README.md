@@ -175,7 +175,7 @@ config.target_dataset = 'car'  # it can be 'car', 'bird', 'aircraft'
 如下所示：
 
 <div align="center">
-    <img src="imgs/test.png" width=800">
+    <img src="imgs/test.jpg" width=800">
 </div>
 
 <a name="6"></a>
