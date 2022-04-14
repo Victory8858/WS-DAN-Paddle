@@ -14,7 +14,7 @@ from models.wsdan import WSDAN
 from utils import CenterLoss, AverageMeter, TopKAccuracyMetric, batch_augment
 
 # which dataset you want to test
-config.target_dataset = 'aircraft'  # it can be 'car', 'bird', 'aircraft'
+config.target_dataset = 'bird'  # it can be 'car', 'bird', 'aircraft'
 
 # logging config
 logging.basicConfig(

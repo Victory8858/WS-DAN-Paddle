@@ -72,7 +72,7 @@ PaddlePaddle == 2.2.0
 
 如下为数据集目录，Fine-grained为总的数据集文件夹，以下列出为模型训练、预测时需要用到的文件，请逐一下载并按照如下名称命名相关文件夹
 
-```
+```shell
 Fine-grained
 ├── CUB_200_2011
 	├── images
@@ -102,37 +102,37 @@ Fine-grained
 
 ## 4. 代码结构说明
 
-```
+```shell
 WS-DAN-Paddle-Victory8858
 ├── README.md  # 用户指南
 ├── datasets   # 各种数据集定义读取文件夹
-	├── __init__.py  # 读取数据集函数
-	├── aircraft_dataset.py  # 飞机类数据集定义
-	├── bird_dataset.py      # 鸟类数据集定义
-	├── car_dataset.py       # 车类数据集定义
+    ├── __init__.py  # 读取数据集函数
+    ├── aircraft_dataset.py  # 飞机类数据集定义
+    ├── bird_dataset.py      # 鸟类数据集定义
+    ├── car_dataset.py       # 车类数据集定义
 ├── models  # 模型相关文件
-	├── bap.py        # BAP模型
-	├── inception.py  # Inceptionv3模型
-	├── wsdan.py      # WS-DAN模型
-	├── InceptionV3_pretrained.pdparams  # Inceptionv3模型权重（PaddleHub下载）
+    ├── bap.py        # BAP模型
+    ├── inception.py  # Inceptionv3模型
+    ├── wsdan.py      # WS-DAN模型
+    ├── InceptionV3_pretrained.pdparams  # Inceptionv3模型权重（PaddleHub下载）
 ├── FGVC  # 模型参数保存与训练日志
-	├── aircraft/ckpt # 飞机类模型参数以及训练日志
-		├── *.pdparams # 模型网络权重
-		├── *.pdopt    # 优化器参数
-		├── *.log      # 训练日志
-	├── brid/ckpt     # 鸟类模型参数以及训练日志
-		├── *.pdparams # 模型网络权重
-		├── *.pdopt    # 优化器参数
-		├── *.log      # 训练日志 
-	├── car/ckpt      # 车类模型参数以及训练日志
-		├── *.pdparams # 模型网络权重
-		├── *.pdopt    # 优化器参数
-		├── *.log      # 训练日志 
+    ├── aircraft/ckpt # 飞机类模型参数以及训练日志
+        ├── *.pdparams # 模型网络权重
+        ├── *.pdopt    # 优化器参数
+        ├── *.log      # 训练日志
+    ├── brid/ckpt     # 鸟类模型参数以及训练日志
+        ├── *.pdparams # 模型网络权重
+        ├── *.pdopt    # 优化器参数
+        ├── *.log      # 训练日志 
+    ├── car/ckpt      # 车类模型参数以及训练日志
+        ├── *.pdparams # 模型网络权重
+        ├── *.pdopt    # 优化器参数
+        ├── *.log      # 训练日志 
 ├── configs.py  # 配置文件（在这里修改需要训练的数据集）
 ├── train.py    # 模型训练
 ├── test.py     # 模型测试
 ├── utils.py    # 工具链
-├── imgs        # Markdown 图片资源
+└── imgs        # Markdown 图片资源
 ```
 
 <a name="5"></a>
