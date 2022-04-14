@@ -33,14 +33,16 @@
 <div align="center">
     <img src="imgs/WS-DAN.jpg" width=400">
 </div>
-                                         
+
 **论文:** [See Better Before Looking Closer: Weakly Supervised Data Augmentation Network for Fine-Grained Visual Classification](https://arxiv.org/pdf/1901.09891.pdf)
 
 **参考repo:** [https://github.com/wvinzh/WS_DAN_PyTorch](https://github.com/wvinzh/WS_DAN_PyTorch)
 
 在此非常感谢`wvinzh`等人贡献的[WS_DAN_PyTorch](https://github.com/wvinzh/WS_DAN_PyTorch)，提高了本repo复现论文的效率。
 
-**aistudio体验教程:** [运行一下](https://aistudio.baidu.com/studio/project/partial/verify/3809770/b93ad25fba8f46768b04289fef877fc8)
+**aistudio体验教程(即将发布):** [运行一下](https://aistudio.baidu.com/studio/project/partial/verify/3809770/b93ad25fba8f46768b04289fef877fc8)
+
+**Github复现地址:** [点击查看](https://aistudio.baidu.com/ibdgpu3/user/320218/3763840/notebooks/3763840.ipynb)
 
 ## 2. 数据集和复现精度
 
@@ -49,8 +51,8 @@
 Dataset | Object | Category | Training | Testing | ACC(复现)    | ACC(原论文) 
 :-:|:-: |:-: |:-: |:-: |:-: |:-:
 [CUB-200-2011](http://www.vision.caltech.edu/visipedia/CUB-200-2011.html) | Bird | 200 | 5994 | 5794 | 89.23 | 89.4
-[fgvc-aircraft](https://ai.stanford.edu/~jkrause/cars/car_dataset.html) | Aircraft | 100 | 6667 | 3333 | 93.01 | 93.0
-[Stanford-Cars](http://www.robots.ox.ac.uk/~vgg/data/fgvc-aircraft/) | Car | 196 | 8144 | 8041| 94.53 | 94.5
+[fgvc-aircraft](https://ai.stanford.edu/~jkrause/cars/car_dataset.html) | Aircraft | 100 | 6667 | 3333 | 94.03 | 93.0
+[Stanford-Cars](http://www.robots.ox.ac.uk/~vgg/data/fgvc-aircraft/) | Car | 196 | 8144 | 8041| 94.88 | 94.5
 [Stanford-Dogs](http://vision.stanford.edu/aditya86/ImageNetDogs/) | Dogs | 120 | 12000 | 8580 | （未要求） | 92.2 
 
 
@@ -97,30 +99,29 @@ Fine-grained
 WS-DAN-Paddle-Victory8858
 ├── README.md  # 用户指南
 ├── datasets   # 各种数据集定义读取文件夹
-│   ├── __init__.py  # 读取数据集函数
-│   ├── aircraft_dataset.py  # 飞机类数据集定义
-│   ├── bird_dataset.py      # 鸟类数据集定义
-│   ├── car_dataset.py       # 车类数据集定义
+	├── __init__.py  # 读取数据集函数
+	├── aircraft_dataset.py  # 飞机类数据集定义
+	├── bird_dataset.py      # 鸟类数据集定义
+	├── car_dataset.py       # 车类数据集定义
 ├── models  # 模型相关文件
-│   ├── bap.py        # BAP模型
-│   ├── inception.py  # Inceptionv3模型
-│   ├── wsdan.py      # WS-DAN模型
-├── GithubFiles       # 从PaddleHub上下载的Inceptionv3预训练模型权重
-│   │   ├── InceptionV3_pretrained.pdparams  # Inceptionv3模型权重
+	├── bap.py        # BAP模型
+	├── inception.py  # Inceptionv3模型
+	├── wsdan.py      # WS-DAN模型
+	├── InceptionV3_pretrained.pdparams  # Inceptionv3模型权重（PaddleHub下载）
 ├── FGVC  # 模型参数保存与训练日志
-│   ├── aircraft/ckpt # 飞机类模型参数以及训练日志
-│   │   ├── *.pdparams # 模型网络权重
-│   │   ├── *.pdopt    # 优化器参数
-│   │   ├── *.log      # 训练日志
-│   ├── brid/ckpt     # 鸟类模型参数以及训练日志
-│   │   ├── *.pdparams # 模型网络权重
-│   │   ├── *.pdopt    # 优化器参数
-│   │   ├── *.log      # 训练日志 
-│   ├── car/ckpt      # 车类模型参数以及训练日志
-│   │   ├── *.pdparams # 模型网络权重
-│   │   ├── *.pdopt    # 优化器参数
-│   │   ├── *.log      # 训练日志 
-├── configs.py  # 配置文件
+    ├── aircraft/ckpt # 飞机类模型参数以及训练日志
+	    ├── *.pdparams # 模型网络权重
+		├── *.pdopt    # 优化器参数
+		├── *.log      # 训练日志
+    ├── brid/ckpt     # 鸟类模型参数以及训练日志
+		├── *.pdparams # 模型网络权重
+		├── *.pdopt    # 优化器参数
+		├── *.log      # 训练日志 
+	├── car/ckpt      # 车类模型参数以及训练日志
+		├── *.pdparams # 模型网络权重
+		├── *.pdopt    # 优化器参数
+		├── *.log      # 训练日志 
+├── configs.py  # 配置文件（在这里修改需要训练的数据集）
 ├── train.py    # 模型训练
 ├── test.py     # 模型测试
 ├── utils.py    # 工具链
