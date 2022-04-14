@@ -1,7 +1,7 @@
 # WS-DAN-Paddle
 ## 目录
 
-- [1. 简介]()
+- [1. 简介](#1)
 
 - [2. 数据集和复现精度]()
 
@@ -24,10 +24,9 @@
 
 - [8. 参考链接与文献]()
 
-   
+<a name="1"></a>
 
 ## 1. 简介
-
 对于细粒度分类问题，一般的网络不能取得准确率较高的结果，而论文《 [See Better Before Looking Closer: Weakly Supervised Data Augmentation Network for Fine-Grained Visual Classification](https://arxiv.org/abs/1901.09891)》提出基于弱监督的数据增强网络，作者提出了基于注意力的双线性池化（BAP）、注意力正则化（AP）、注意力引导数据增强（Drop和Crop）、最后预测阶段进行目标定位与图像精修（Refinement），本Repo为基于Paddle2.2框架的复现。
 
 <div align="center">
@@ -44,6 +43,8 @@
 
 **Github复现地址:** [点击查看](https://github.com/Victory8858/WS-DAN-Paddle)
 
+<a name="2"></a>
+
 ## 2. 数据集和复现精度
 
 论文中采用的数据集均为细粒度分类问题的典型代表，包括鸟、飞机、汽车、狗等类别，相关数据集的下载及复现精度如下：（点击数据集链接可下载对应数据集）                           
@@ -55,6 +56,7 @@ Dataset | Object | Category | Training | Testing | ACC(复现)    | ACC(原论�
 [Stanford-Cars](http://www.robots.ox.ac.uk/~vgg/data/fgvc-aircraft/) | Car | 196 | 8144 | 8041| 94.88 | 94.5
 [Stanford-Dogs](http://vision.stanford.edu/aditya86/ImageNetDogs/) | Dogs | 120 | 12000 | 8580 | （未要求） | 92.2 
 
+<a name="3"></a>
 
 ## 3. 准备数据与环境
 
@@ -94,7 +96,10 @@ Fine-grained
 
 您需要准备Inceptionv3预训练模型权重，该模型用于提取特征图（Feature Map, FM）和注意力图（Attention Map, AM），在训练前，您需要下载[Inceptionv3提取码:1234](链接：https://pan.baidu.com/s/1dO2AG-R0GCc2RYEZqAqSNA )预训练模型参数，并保存到models文件夹下，然后即可训练、测试。
 
+<a name="4"></a>
+
 ## 4. 代码结构说明
+
 ```
 WS-DAN-Paddle-Victory8858
 ├── README.md  # 用户指南
@@ -127,6 +132,8 @@ WS-DAN-Paddle-Victory8858
 ├── utils.py    # 工具链
 ├── imgs        # Markdown 图片资源
 ```
+
+<a name="5"></a>
 
 ## 5. 开始使用
 
@@ -163,14 +170,17 @@ config.target_dataset = 'car'  # it can be 'car', 'bird', 'aircraft'
     <img src="imgs/test.png" width=800">
 </div>
 
+<a name="6"></a>
 
 ## 6. TIPC自动化测试脚本(暂未添加)
 
-
+<a name="7"></a>
 
 ## 7. LICENSE
 
 [MIT license](./LICENSE)
+
+<a name="8"></a>
 
 ## 8. 参考链接与文献
 
