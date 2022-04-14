@@ -1,7 +1,7 @@
 """
 - @Author: GaoDing
-- @Date: 2022/04/08 22:00
-- @Description: CUB-200-2011 Brid 数据集构建
+- @Date: 2022/04/14 10:00
+- @Description: Brid 数据集构建
 """
 
 import os
