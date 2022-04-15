@@ -85,5 +85,5 @@ for i, (X, y) in enumerate(val_loader):
 
 logs['val_{}'.format(loss_container.name)] = epoch_loss
 logs['val_{}'.format(raw_metric.name)] = epoch_acc
-batch_info = 'Val Loss {:.4f}, Val Acc ({:.3f}, {:.3f})'.format(epoch_loss, epoch_acc[0], epoch_acc[1])
+batch_info = 'Val Loss {:.4f}, Val Acc ({:.2f}, {:.2f})'.format(epoch_loss, epoch_acc[0], epoch_acc[1])
 print(batch_info)
