@@ -51,7 +51,7 @@
 
 Dataset | Object | Category | Training | Testing | ACC(复现)    | ACC(原论文) 
 :-:|:-: |:-: |:-: |:-: |:-: |:-:
-[CUB-200-2011](http://www.vision.caltech.edu/visipedia/CUB-200-2011.html) | Bird | 200 | 5994 | 5794 | 89.23 | 89.4
+[CUB-200-2011](http://www.vision.caltech.edu/visipedia/CUB-200-2011.html) | Bird | 200 | 5994 | 5794 | 89.32 | 89.4
 [fgvc-aircraft](https://ai.stanford.edu/~jkrause/cars/car_dataset.html) | Aircraft | 100 | 6667 | 3333 | 94.03 | 93.0
 [Stanford-Cars](http://www.robots.ox.ac.uk/~vgg/data/fgvc-aircraft/) | Car | 196 | 8144 | 8041| 94.88 | 94.5
 [Stanford-Dogs](http://vision.stanford.edu/aditya86/ImageNetDogs/) | Dogs | 120 | 12000 | 8580 | （未要求） | 92.2 
