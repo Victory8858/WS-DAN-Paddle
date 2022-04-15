@@ -39,7 +39,7 @@
 
 在此非常感谢`wvinzh`等人贡献的[WS_DAN_PyTorch](https://github.com/wvinzh/WS_DAN_PyTorch)，提高了本repo复现论文的效率。
 
-**AI Studio体验教程:** [运行一下](https://aistudio.baidu.com/studio/project/partial/verify/3809770/b93ad25fba8f46768b04289fef877fc8)
+**AI Studio体验教程:** [运行一下](https://aistudio.baidu.com/studio/project/partial/verify/3809770/a097f9b6e88d4119bc0ca7f13c9a2413)
 
 **Github复现地址:** [点击查看](https://github.com/Victory8858/WS-DAN-Paddle)
 
