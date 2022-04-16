@@ -2,27 +2,20 @@
 ## 目录
 
 - [1. 简介](#1)
-
 - [2. 数据集和复现精度](#2)
-
 - [3. 准备数据与环境](#3)
   
     - [3.1 准备环境](#31)
     - [3.2 准备数据](#32)
     - [3.3 准备模型](#33)
-    
 - [4. 代码结构说明](#4)
-
 - [5. 开始使用](#5)
   
     - [5.1 模型训练](#51)
     - [5.2 模型预测](#52)
-    
-- [6. 自动化测试脚本(暂未添加)](#6)
-
-- [7. LICENSE](#7)
-
-- [8. 参考链接与文献](#8)
+    - [5.3 单张图片预测](#52)
+- [6. LICENSE](#6)
+- [7. 参考链接与文献](#7)
 
 <a name="1"></a>
 
@@ -98,7 +91,7 @@ Fine-grained
 
 ### 3.3 准备模型
 
-您需要准备Inceptionv3预训练模型权重，该模型用于提取特征图（Feature Map, FM）和注意力图（Attention Map, AM），在训练前，由于Github无法上传100MB以上文件，该权重参数141MB，所以您需要手动下载[Inceptionv3提取码:1234](链接：https://pan.baidu.com/s/1dO2AG-R0GCc2RYEZqAqSNA )预训练模型参数文件，并保存到models文件夹下，然后即可训练、测试。
+若您想从头训练，需要准备Inceptionv3预训练模型权重，该模型用于提取特征图（Feature Map, FM）和注意力图（Attention Map, AM），由于Github无法上传100MB以上文件，该权重参数141MB，所以您需要手动下载[Inceptionv3提取码:1234](链接：https://pan.baidu.com/s/1dO2AG-R0GCc2RYEZqAqSNA )预训练模型参数文件，并保存到models文件夹下，然后即可开始训练。
 
 <a name="4"></a>
 
@@ -116,38 +109,40 @@ WS-DAN-Paddle-Victory8858
     ├── bap.py        # BAP模型
     ├── inception.py  # Inceptionv3模型
     ├── wsdan.py      # WS-DAN模型
-    ├── InceptionV3_pretrained.pdparams  # Inceptionv3模型权重（PaddleHub下载）
+    ├── InceptionV3_pretrained.pdparams  # Inceptionv3模型权重（需要您下载，见3.3中链接）
 ├── FGVC  # 模型参数保存与训练日志
-    ├── aircraft/ckpt # 飞机类模型参数以及训练日志
+    ├── aircraft # 飞机类模型参数以及训练日志
         ├── *.pdparams # 模型网络权重
         ├── *.pdopt    # 优化器参数
         ├── *.log      # 训练日志
-    ├── brid/ckpt     # 鸟类模型参数以及训练日志
+    ├── brid     # 鸟类模型参数以及训练日志
         ├── *.pdparams # 模型网络权重
         ├── *.pdopt    # 优化器参数
         ├── *.log      # 训练日志 
-    ├── car/ckpt      # 车类模型参数以及训练日志
+    ├── car      # 车类模型参数以及训练日志
         ├── *.pdparams # 模型网络权重
         ├── *.pdopt    # 优化器参数
         ├── *.log      # 训练日志 
-├── configs.py  # 配置文件（在这里修改需要训练的数据集）
-├── train.py    # 模型训练
-├── test.py     # 模型测试
-├── utils.py    # 工具链
-└── imgs        # Markdown 图片资源
+├── dataset_path_config.py  # 数据集路径配置文件（您需要修改）
+├── train.py     # 模型训练
+├── train.sh     # 模型训练启动脚本
+├── val.py       # 模型测试
+├── val.sh       # 模型测试启动脚本
+├── predicted.py # 单张图片预测
+├── utils.py     # 工具链
+└── imgs         # Markdown 图片资源
 ```
 
 <a name="5"></a>
 
 ## 5. 开始使用
 
-在开始训练前，假如您已经按上述操作准备好了相关数据集，并按照3.2中的文件名命名，那么最后一步就是修改datasets文件夹中每一个数据集读取文件中的数据集路径，修改成你自己的路径即可。
-以`aircraft_dataset.py`文件为例，您需要修改的内容如下，
+在开始训练前，假如您已经按上述操作准备好了相关数据集，并按照3.2中的文件名命名，那么最后一步就是修改`dataset_path_config.py`文件中的数据集路径，您需要修改的内容如下：
 
 ```python
-# DATAPATH = "E:\\dataset\\Fine-grained\\fgvc-aircraft-2013b\\data"  # Windows参考路径
-# DATAPATH = '/home/aistudio/data/fgvc-aircraft-2013b/data'          # AI_Studio参考路径
-DATAPATH = ''                                                        # 修改为您自己的路径
+bird_dataset_path = "E:/dataset/Fine-grained/CUB_200_2011"  # 修改为您的路径
+car_dataset_path = "E:/dataset/Fine-grained/Car"  # 修改为您的路径
+aircraft_dataset_path = "E:/dataset/Fine-grained/fgvc-aircraft-2013b/data" # 修改为您的路径 
 ```
 
 修改好后，马上即可开始训练。
@@ -156,20 +151,26 @@ DATAPATH = ''                                                        # 修改为
 
 ### 5.1 模型训练
 
-共有3种数据集需要训练，每个数据集都需要训练一个模型，在训练开始前，您可通过修改config.py中的target_dataset变量来指定想要训练的模型，如下所示：
+共有3种数据集需要训练，每个数据集都需要训练一个模型，在训练开始前，您可修改train.sh中的`dataset`变量来指定想要训练的模型，如下所示：
 
-```python
-target_dataset = 'bird'  # options: 'aircraft', 'bird', 'car'
+```shell
+python train.py \
+    --dataset car \  # Options: bird, car, aircraft
+    --epochs 80 \
+    --batch_size 12 \
+    --num_workers 0
 ```
 
 <a name="52"></a>
 
 ### 5.2 模型预测
 
-您只需运行test.py文件即可，修改如下变量即可指定测试何种数据集的精度
+您只需运行val.sh文件即可，修改`dataset`变量即可指定测试何种数据集的精度
 ```python
-# which dataset you want to test
-config.target_dataset = 'car'  # it can be 'car', 'bird', 'aircraft'
+python val.py \
+    --dataset car \  # Options: bird, car, aircraft
+    --batch_size 6 \
+    --num_workers 0
 ```
 如下所示：
 
@@ -177,19 +178,33 @@ config.target_dataset = 'car'  # it can be 'car', 'bird', 'aircraft'
     <img src="imgs/test.jpg" width=800">
 </div>
 
+<a name="53"></a>
+
+### 5.3 单张图片预测
+
+您需运行predict.py文件，如想更换预测的数据集，运行predict.sh文件修改`dataset`变量即可
+```python
+python predict.py \
+    --dataset car \  # Options: bird, car, aircraft
+```
+预测结果如下所示：
+
+<div align="center">
+    <img src="imgs/aircraft.jpeg" width=400">
+</div>
+
+<div align="center">
+    <img src="imgs/aircraft_predict.jpg" width=800">
+</div>
 <a name="6"></a>
 
-## 6. TIPC自动化测试脚本(暂未添加)
-
-<a name="7"></a>
-
-## 7. LICENSE
+## 6. LICENSE
 
 [MIT license](./LICENSE)
 
-<a name="8"></a>
+<a name="7"></a>
 
-## 8. 参考链接与文献
+## 7. 参考链接与文献
 
 - [WSDAN 论文及代码解读_景唯acr的博客-CSDN博客_wsdan](https://blog.csdn.net/weixin_41735859/article/details/108417343)
 - [GuYuc/WS-DAN.PyTorch: A PyTorch implementation of WS-DAN](https://github.com/GuYuc/WS-DAN.PyTorch)

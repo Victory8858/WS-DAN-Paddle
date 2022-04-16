@@ -9,8 +9,9 @@ import numpy as np
 from PIL import Image
 from paddle.io import Dataset
 from utils import getTransform
+import dataset_path_config
 
-DATAPATH = "E:\\dataset\\Fine-grained\\fgvc-aircraft-2013b\\data"  # My Dataset Path
+DATAPATH = dataset_path_config.aircraft_dataset_path
 
 FILENAME_LENGTH = 7
 

@@ -10,8 +10,9 @@ from PIL import Image
 from scipy.io import loadmat
 from paddle.io import Dataset
 from utils import getTransform
+import dataset_path_config
 
-DATAPATH = "E:\\dataset\\Fine-grained\\Car"  # My Dataset Path
+DATAPATH = dataset_path_config.car_dataset_path
 
 
 class CarDataset(Dataset):

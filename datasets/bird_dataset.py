@@ -9,8 +9,9 @@ from PIL import Image
 from paddle.io import Dataset
 from utils import getTransform
 import numpy as np
+import dataset_path_config
 
-DATAPATH = "E:\\dataset\\Fine-grained\\CUB_200_2011"  # My Dataset Path
+DATAPATH = dataset_path_config.bird_dataset_path
 
 
 class BirdDataset(Dataset):
