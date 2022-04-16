@@ -18,8 +18,24 @@ class BAP(paddle.nn.Layer):
         _, M, AH, AW = attentions.shape
         if AH != H or AW != W:
             F.interpolate(attentions, size=[H, W], mode="bilinear")
-        feature_matrix = paddle.einsum('imjk,injk->imn', attentions, features) / float(H * W)
+
+        # 此段程序用来替代einsum函数
+        mat = []
+        for i in range(B):  # batch 拆分
+            cur_atm = attentions[i]  # 去除第一维
+            cur_ftm = features[i]  # 去除第一维
+            cur_atm = paddle.reshape(cur_atm, shape=[M, -1])  # 展开
+            # print("cur_atm shape: ", cur_atm.shape)
+            cur_ftm = paddle.reshape(cur_ftm, shape=[C, -1])  # 展开
+            cur_ftm = paddle.transpose(cur_ftm, perm=[1, 0])  # 转置
+            # print("cur_ftm shape: ", cur_ftm.shape)
+            cur_feature_matrix = paddle.matmul(cur_atm, cur_ftm)  # 矩阵相乘，相当于点积
+            mat.append(cur_feature_matrix)
+        feature_matrix = paddle.stack(mat, axis=0) / float(H * W)
+
+        # feature_matrix = paddle.einsum('imjk,injk->imn', attentions, features) / float(H * W)  # 动转静不能用
         feature_matrix = paddle.reshape(feature_matrix, [B, -1])
+
         # sign-sqrt
         feature_matrix = paddle.sign(feature_matrix) * paddle.sqrt(paddle.abs(feature_matrix) + 1e-12)
 
