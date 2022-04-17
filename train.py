@@ -1,3 +1,17 @@
+# Copyright (c) 2021 PaddlePaddle Authors. All Rights Reserved.
+
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+
+#     http://www.apache.org/licenses/LICENSE-2.0
+
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 """
 - @Author: GaoDing
 - @Date: 2022/04/14 10:00
@@ -20,17 +34,18 @@ import paddle.nn.functional as F
 def getArgs():
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset", default="bird", type=str,
-                        help="Which dataset you want to verify? bird, car, aircraft")
-    parser.add_argument("--epochs", default=80, type=int, help="how many epochs you want to train")
-    parser.add_argument("--batch_size", default=12, type=int)
-    parser.add_argument("--learning_rate", default=0.001, type=float)
-    parser.add_argument("--num_workers", default=4, type=int)
-    parser.add_argument("--input_size", default=(448, 448), type=tuple)
+                        help="Which dataset you want to verify? bird, car, aircraft, bird_tiny")
+    parser.add_argument("--epochs", default=6, type=int, help="how many epochs you want to train")
+    parser.add_argument("--batch-size", default=12, type=int)
+    parser.add_argument("--learning-rate", default=0.001, type=float)
+    parser.add_argument("--num-workers", default=4, type=int)
+    parser.add_argument("--input-size", default=(448, 448), type=tuple)
     parser.add_argument("--beta", default=5e-2, type=float)
-    parser.add_argument("--net_name", default='inception_mixed_6e', type=str, help="feature extractor")
-    parser.add_argument("--num_attentions", default=32, type=int, help="number of attention maps")
-    parser.add_argument("--save_dir", default="FGVC", type=str)
+    parser.add_argument("--net-name", default='inception_mixed_6e', type=str, help="feature extractor")
+    parser.add_argument("--num-attentions", default=32, type=int, help="number of attention maps")
+    parser.add_argument("--save-dir", default="FGVC", type=str)
     parser.add_argument("--ckpt", default=False, type=bool, help="if you want continue to train use the exist model")
+    parser.add_argument("--output-dir", default=None, type=str)
     args = parser.parse_args()
 
     return args
@@ -52,7 +67,7 @@ def train():
     # read the dataset
     train_dataset, val_dataset = getDataset(args.dataset, args.input_size)
     train_loader, val_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers), \
-                               DataLoader(val_dataset, batch_size=args.batch_size * 4, shuffle=False, num_workers=args.num_workers)
+                               DataLoader(val_dataset, batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers)
     num_classes = train_dataset.num_classes
 
     logging.info('Dataset Name:{dataset_name}, Train:[{train_num}], Val:[{val_num}]'.format(dataset_name=args.dataset, train_num=len(train_dataset), val_num=len(val_dataset)))

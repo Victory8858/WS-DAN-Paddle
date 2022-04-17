@@ -14,8 +14,9 @@
     - [5.1 模型训练](#51)
     - [5.2 模型预测](#52)
     - [5.3 单张图片预测](#52)
-- [6. LICENSE](#6)
-- [7. 参考链接与文献](#7)
+- [6. 自动化测试脚本](#6)
+- [7. LICENSE](#7)
+- [8. 参考链接与文献](#8)
 
 <a name="1"></a>
 
@@ -101,15 +102,21 @@ Fine-grained
 WS-DAN-Paddle-Victory8858
 ├── README.md  # 用户指南
 ├── datasets   # 各种数据集定义读取文件夹
+	├── CUBTINY      # 一小部分鸟类数据集
+		├── *.jpg    # 鸟类图片（共5张）
+		├── *.txt    # 训练、预测标签
     ├── __init__.py  # 读取数据集函数
     ├── aircraft_dataset.py  # 飞机类数据集定义
     ├── bird_dataset.py      # 鸟类数据集定义
+    ├── bird_tiny_dataset.py # 一小部分鸟类数据集定义（用于TIPC）
     ├── car_dataset.py       # 车类数据集定义
 ├── models  # 模型相关文件
     ├── bap.py        # BAP模型
     ├── inception.py  # Inceptionv3模型
     ├── wsdan.py      # WS-DAN模型
     ├── InceptionV3_pretrained.pdparams  # Inceptionv3模型权重（需要您下载，见3.3中链接）
+├── test_tipc  # TICP 
+	├──	  # 具体见TICP部分文档
 ├── FGVC  # 模型参数保存与训练日志
     ├── aircraft # 飞机类模型参数以及训练日志
         ├── *.pdparams # 模型网络权重
@@ -129,6 +136,7 @@ WS-DAN-Paddle-Victory8858
 ├── val.py       # 模型测试
 ├── val.sh       # 模型测试启动脚本
 ├── predicted.py # 单张图片预测
+├── export_model.py  # 模型动转静
 ├── utils.py     # 工具链
 └── imgs         # Markdown 图片资源
 ```
@@ -145,7 +153,7 @@ car_dataset_path = "E:/dataset/Fine-grained/Car"  # 修改为您的路径
 aircraft_dataset_path = "E:/dataset/Fine-grained/fgvc-aircraft-2013b/data" # 修改为您的路径 
 ```
 
-修改好后，马上即可开始训练。
+修改好后，马上即可开始训练、测试。
 
 <a name="51"></a>
 
@@ -154,11 +162,9 @@ aircraft_dataset_path = "E:/dataset/Fine-grained/fgvc-aircraft-2013b/data" # 修
 共有3种数据集需要训练，每个数据集都需要训练一个模型，在训练开始前，您可修改train.sh中的`dataset`变量来指定想要训练的模型，如下所示：
 
 ```shell
-python train.py \
-    --dataset car \  # Options: bird, car, aircraft
-    --epochs 80 \
-    --batch_size 12 \
-    --num_workers 0
+bash train.sh
+# 或
+python train.py --dataset car --epochs 80 --batch_size 12 --num_workers 0
 ```
 
 <a name="52"></a>
@@ -166,11 +172,10 @@ python train.py \
 ### 5.2 模型预测
 
 您只需运行val.sh文件即可，修改`dataset`变量即可指定测试何种数据集的精度
-```python
-python val.py \
-    --dataset car \  # Options: bird, car, aircraft
-    --batch_size 6 \
-    --num_workers 0
+```shell
+bash val.sh
+# 或
+python val.py --dataset car --batch-size 6 --num-workers 0
 ```
 如下所示：
 
@@ -183,9 +188,10 @@ python val.py \
 ### 5.3 单张图片预测
 
 您需运行predict.py文件，如想更换预测的数据集，运行predict.sh文件修改`dataset`变量即可
-```python
-python predict.py \
-    --dataset car \  # Options: bird, car, aircraft
+```shell
+bash predict.sh 
+# 或
+python predict.py --dataset aircraft  # Options: bird, car, aircraft
 ```
 预测结果如下所示：
 
@@ -196,15 +202,26 @@ python predict.py \
 <div align="center">
     <img src="imgs/aircraft_predict.jpg" width=800">
 </div>
+
 <a name="6"></a>
 
-## 6. LICENSE
+## 6. TIPC自动化测试脚本
 
-[MIT license](./LICENSE)
+TIPC命令如下:
+
+```shell
+bash test_tipc/test_train_inference_python.sh test_tipc/configs/WSDAN/train_infer_python.txt lite_train_lite_infer
+```
 
 <a name="7"></a>
 
-## 7. 参考链接与文献
+## 7. LICENSE
+
+[Apache 2.0 license](./LICENSE)
+
+<a name="8"></a>
+
+## 8. 参考链接与文献
 
 - [WSDAN 论文及代码解读_景唯acr的博客-CSDN博客_wsdan](https://blog.csdn.net/weixin_41735859/article/details/108417343)
 - [GuYuc/WS-DAN.PyTorch: A PyTorch implementation of WS-DAN](https://github.com/GuYuc/WS-DAN.PyTorch)

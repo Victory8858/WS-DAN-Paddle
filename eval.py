@@ -1,3 +1,17 @@
+# Copyright (c) 2021 PaddlePaddle Authors. All Rights Reserved.
+
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+
+#     http://www.apache.org/licenses/LICENSE-2.0
+
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 """
 - @Author: GaoDing
 - @Date: 2022/04/14 10:00
@@ -16,13 +30,13 @@ from utils import AverageMeter, TopKAccuracyMetric, batch_augment
 
 def getArgs():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dataset", default="bird", type=str, help="Which dataset you want to verify? bird, car, aircraft")
-    parser.add_argument("--test_log_path", default="FGVC/", type=str)
-    parser.add_argument("--batch_size", default=6, type=int)
-    parser.add_argument("--num_workers", default=0, type=int)
-    parser.add_argument("--input_size", default=(448, 448), type=tuple)
-    parser.add_argument("--net_name", default='inception_mixed_6e', type=str, help="feature extractor")
-    parser.add_argument("--num_attentions", default=32, type=int, help="number of attention maps")
+    parser.add_argument("--dataset", default="car", type=str, help="Which dataset you want to verify? bird, car, aircraft, bird_tiny")
+    parser.add_argument("--test-log-path", default="FGVC/", type=str)
+    parser.add_argument("--batch-size", default=6, type=int)
+    parser.add_argument("--num-workers", default=0, type=int)
+    parser.add_argument("--input-size", default=(448, 448), type=tuple)
+    parser.add_argument("--net-name", default='inception_mixed_6e', type=str, help="feature extractor")
+    parser.add_argument("--num-attentions", default=32, type=int, help="number of attention maps")
     args = parser.parse_args()
 
     return args
@@ -58,6 +72,8 @@ def val():
         net_state_dict = paddle.load("FGVC/aircraft/aircraft_model.pdparams")
     if args.dataset == 'car':
         net_state_dict = paddle.load("FGVC/car/car_model.pdparams")
+    if args.dataset == 'bird_tiny':
+        net_state_dict = paddle.load("FGVC/bird_tiny/bird_tiny_model.pdparams")
     net.set_dict(net_state_dict)
     net.eval()
 

@@ -1,3 +1,17 @@
+# Copyright (c) 2021 PaddlePaddle Authors. All Rights Reserved.
+
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+
+#     http://www.apache.org/licenses/LICENSE-2.0
+
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 """
 - @Author: GaoDing
 - @Date: 2022/04/14 10:00
@@ -15,23 +29,28 @@ import matplotlib.pyplot as plt
 ckpt_path = {
     'bird': "FGVC/bird/bird_model.pdparams",
     'car': "FGVC/car/car_model.pdparams",
-    'aircraft': "FGVC/aircraft/aircraft_model.pdparams"
+    'aircraft': "FGVC/aircraft/aircraft_model.pdparams",
+    'bird_tiny': "FGVC/bird/bird_model.pdparams"
 }
 
 num_images = {
     'bird': 5794,
     'car': 8041,
-    'aircraft': 3333
+    'aircraft': 3333,
+    'bird_tiny': 5,
 }
 
 
 def getArgs():
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset", default="bird", type=str,  # 想更换不同的数据集测试，仅仅更改这里即可
-                        help="Which dataset you want to verify? bird, car, aircraft")
-    parser.add_argument("--input_size", default=(448, 448), type=tuple)
-    parser.add_argument("--net_name", default='inception_mixed_6e', type=str, help="feature extractor")
-    parser.add_argument("--num_attentions", default=32, type=int, help="number of attention maps")
+                        help="Which dataset you want to verify? bird, car, aircraft, bird_tiny")
+    parser.add_argument("--input-size", default=(448, 448), type=tuple)
+    parser.add_argument("--net-name", default='inception_mixed_6e', type=str, help="feature extractor")
+    parser.add_argument("--num-attentions", default=32, type=int, help="number of attention maps")
+    parser.add_argument("--benchmark", default=None, type=str)
+    parser.add_argument("--batch-size", default=None, type=str)
+    parser.add_argument("--use-gpu", default=None, type=bool)
     args = parser.parse_args()
 
     return args

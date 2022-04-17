@@ -1,2 +1,1 @@
-python predict.py \
-    --dataset aircraft
+python predict.py --dataset aircraft

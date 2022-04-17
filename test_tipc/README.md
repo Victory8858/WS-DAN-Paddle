@@ -9,47 +9,30 @@
     <img src="docs/guide.png" width="1000">
 </div>
 
-
 ## 2. 测试工具简介
 ### 目录介绍
 
 ```shell
 test_tipc/
-├── configs/  # 配置文件目录
-    ├── N2N   # N2N模型的测试配置文件目录 
-        ├── train_infer_python.txt      # 测试Linux上python训练预测（基础训练预测）的配置文件
-        ├── train_infer_python.md      # 测试Linux上python训练预测（基础训练预测）的使用文档
-├── results/   # 预测结果
-├── prepare.sh                        # 完成test_*.sh运行所需要的数据和模型下载
-├── test_train_inference_python.sh    # 测试python训练预测的主程序
-└── readme.md                         # 使用文档
+├── configs/    # 配置文件目录
+    ├── WS-DAN  # WS-DAN模型的测试配置文件目录 
+        ├── train_infer_python.txt      # 基础训练推理测试配置文件
+├──docs         # 文档目录
+    ├── test_train_inference_python.md  # 基础训练推理测试说明文档
+├── test_train_inference_python.sh      # TIPC基础训练推理测试解析脚本
+├── common_func.sh                      # TIPC基础训练推理测试常用函数
+└── readme.md                           # 使用文档
 ```
 
 ### 测试流程概述
 
 使用本工具，可以测试不同功能的支持情况，以及预测结果是否对齐，测试流程概括如下：
 
-1. 运行prepare.sh准备测试所需数据和模型；
-2. 运行要测试的功能对应的测试脚本`test_train_inference_python.sh`，产出log，由log可以看到不同配置是否运行成功；
+运行要测试的功能对应的测试脚本`test_train_inference_python.sh`，产出log，由log可以看到不同配置是否运行成功，结果如下：
 
-测试单项功能仅需两行命令，**如需测试不同模型/功能，替换配置文件即可**，命令格式如下：
 ```shell
-# 功能：准备数据
-# 格式：bash + 运行脚本 + 参数1: 配置文件选择 + 参数2: 模式选择
-bash test_tipc/prepare.sh  configs/[model_name]/[params_file_name]  [Mode]
-
-# 功能：运行测试
-# 格式：bash + 运行脚本 + 参数1: 配置文件选择 + 参数2: 模式选择
-bash test_tipc/test_train_inference_python.sh configs/[model_name]/[params_file_name]  [Mode]
-```
-
-以下为示例：
-```shell
-# 功能：准备数据
-# 格式：bash + 运行脚本 + 参数1: 配置文件选择 + 参数2: 模式选择
-bash test_tipc/prepare.sh ./test_tipc/configs/PaDiM/train_infer_python.txt 'lite_train_lite_infer'
-
-# 功能：运行测试
-# 格式：bash + 运行脚本 + 参数1: 配置文件选择 + 参数2: 模式选择
-bash test_tipc/test_train_inference_python.sh ./test_tipc/configs/PaDiM/train_infer_python.txt 'lite_train_lite_infer'
+Run successfully with command - python train.py --output-dir=output/=log/WS-DAN/lite_train_lite_infer/norm_train_gpus_0 --epochs=6   --batch-size=5!  
+Run successfully with command - python eval.py --dataset bird_tiny  !  
+Run successfully with command - python export_model.py --model bird    !  
+Run successfully with command - python predict.py --dataset bird --use-gpu=True --benchmark=log/WS-DAN/lite_train_lite_infer/norm_train_gpus_0 --batch-size=1     > log/WS-DAN/lite_train_lite_infer/python_infer_gpu_batchsize_1.log 2>&1 !
 ```

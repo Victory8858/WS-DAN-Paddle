@@ -1,5 +1,1 @@
-python train.py \
-    --dataset bird \
-    --epochs 80 \
-    --batch_size 12 \
-    --num_workers 0
+python train.py --dataset=bird --epochs=80 --batch-size=6 --num-workers=0

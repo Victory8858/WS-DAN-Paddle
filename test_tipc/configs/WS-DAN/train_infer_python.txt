@@ -1,0 +1,30 @@
+===========================train_params===========================
+model_name:WS-DAN
+python:python
+gpu_list:0
+use-gpu:True|True
+--epochs:lite_train_lite_infer=6|lite_train_whole_infer=5|whole_train_whole_infer=500
+--output-dir=output/
+--batch-size:lite_train_lite_infer=5|whole_train_whole_infer=200
+null:null
+train_model_name:output/model_best
+--data-path:datasets/CUBTINY
+##
+trainer:norm_train
+norm_train:train.py --dataset bird_tiny
+##
+===========================eval_params===========================
+eval:eval.py --dataset bird_tiny
+##
+===========================infer_params===========================
+null:null
+null:null
+norm_export:export_model.py --model bird
+##
+null:null
+infer_export:export_model.py --model bird_tiny
+##
+inference:predict.py --dataset bird
+--use-gpu:True
+--batch-size:1
+--benchmark:True

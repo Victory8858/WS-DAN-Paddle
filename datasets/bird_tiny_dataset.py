@@ -23,52 +23,41 @@ from PIL import Image
 from paddle.io import Dataset
 from utils import getTransform
 import numpy as np
-import dataset_path_config
 
-DATAPATH = dataset_path_config.bird_dataset_path
+DATAPATH = "datasets/CUBTINY"
 
 
-class BirdDataset(Dataset):
+class BirdTinyDataset(Dataset):
     def __init__(self, mode='train', resize=(448, 448)):
-        super(BirdDataset, self).__init__()
+        super(BirdTinyDataset, self).__init__()
         self.mode = mode
         assert self.mode in ['train', 'val', 'test'], "mode should be 'train' or 'test', but got {}".format(self.mode)
         self.resize = resize
         self.image_idx = []
         self.image_path = {}
         self.image_label = {}
-        self.num_classes = 200  # 共有200类(0-199)
-
-        # 从 images.txt 获取图像索引号以及路径
-        with open(os.path.join(DATAPATH, 'images.txt')) as f:
-            for line in f.readlines():
-                idx, img_path = line.strip().split(' ')
-                self.image_path[idx] = img_path
+        self.num_classes = 5  # 共有5类
 
         # 从 image_class_labels.txt 获取图像标签
-        with open(os.path.join(DATAPATH, 'image_class_labels.txt')) as f:
-            for line in f.readlines():
-                idx, label = line.strip().split(' ')
-                self.image_label[idx] = int(label)
+        if self.mode == 'train':
+            file_name = "train.txt"
+        else:
+            file_name = "test.txt"
 
-        # 从 train_test_split.txt 获取训练、测试图片索引存放到 self.image_id 列表
-        with open(os.path.join(DATAPATH, 'train_test_split.txt')) as f:
+        with open(os.path.join(DATAPATH, file_name)) as f:
             for line in f.readlines():
-                current_image_idx, is_training_image = line.strip().split(' ')
-                is_training_image = int(is_training_image)
-                if self.mode == 'train' and is_training_image:
-                    self.image_idx.append(current_image_idx)
-                if self.mode in ('val', 'test') and not is_training_image:
-                    self.image_idx.append(current_image_idx)
+                img_name, label = line.strip().split(',')
+                self.image_label[img_name] = int(label)
+                self.image_idx.append(img_name)
 
         # 图像预处理（resize，明暗度变换）等
         self.transform = getTransform(self.resize, self.mode)
 
     def __getitem__(self, item):
-        current_image_idx = self.image_idx[item]
-        image = Image.open(os.path.join(DATAPATH, 'images', self.image_path[current_image_idx])).convert('RGB')  # CHW
+        current_image_name = self.image_idx[item]
+        image = Image.open(os.path.join(DATAPATH, current_image_name)).convert('RGB')  # CHW
         image = self.transform(image)
-        label = np.int64(self.image_label[current_image_idx] - 1)
+        label = np.int64(self.image_label[current_image_name] - 1)
 
         return image, label  # 标签应该从0开始
 
@@ -77,8 +66,11 @@ class BirdDataset(Dataset):
 
 
 if __name__ == '__main__':
-    train_dataset = BirdDataset(mode='test')
+    train_dataset = BirdTinyDataset(mode='test')
     print(len(train_dataset))
-    for i in range(10):
+    import matplotlib.pyplot as plt
+    for i in range(5):
         raw_image, image_label = train_dataset[i]
+        plt.imshow(raw_image[0])
+        plt.show()
         print(raw_image.shape, image_label)
