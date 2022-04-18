@@ -104,9 +104,9 @@ Fine-grained
 WS-DAN-Paddle-Victory8858
 ├── README.md  # 用户指南
 ├── datasets   # 各种数据集定义读取文件夹
-	├── CUBTINY      # 一小部分鸟类数据集
-		├── *.jpg    # 鸟类图片（共5张）
-		├── *.txt    # 训练、预测标签
+    ├── CUBTINY      # 一小部分鸟类数据集
+        ├── *.jpg    # 鸟类图片（共5张）
+        ├── *.txt    # 训练、预测标签
     ├── __init__.py  # 读取数据集函数
     ├── aircraft_dataset.py  # 飞机类数据集定义
     ├── bird_dataset.py      # 鸟类数据集定义
