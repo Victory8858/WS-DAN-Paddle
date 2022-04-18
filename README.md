@@ -122,15 +122,12 @@ WS-DAN-Paddle-Victory8858
 ├── FGVC  # 模型参数保存与训练日志
     ├── aircraft # 飞机类模型参数以及训练日志
         ├── *.pdparams # 模型网络权重
-        ├── *.pdopt    # 优化器参数
         ├── *.log      # 训练日志
     ├── brid     # 鸟类模型参数以及训练日志
         ├── *.pdparams # 模型网络权重
-        ├── *.pdopt    # 优化器参数
         ├── *.log      # 训练日志 
     ├── car      # 车类模型参数以及训练日志
         ├── *.pdparams # 模型网络权重
-        ├── *.pdopt    # 优化器参数
         ├── *.log      # 训练日志 
 ├── dataset_path_config.py  # 数据集路径配置文件（您需要修改）
 ├── train.py     # 模型训练
