@@ -31,8 +31,8 @@ test_tipc/
 运行要测试的功能对应的测试脚本`test_train_inference_python.sh`，产出log，由log可以看到不同配置是否运行成功，结果如下：
 
 ```shell
-Run successfully with command - python train.py --output-dir=output/=log/WS-DAN/lite_train_lite_infer/norm_train_gpus_0 --epochs=6   --batch-size=5!  
-Run successfully with command - python eval.py --dataset bird_tiny  !  
-Run successfully with command - python export_model.py --model bird    !  
-Run successfully with command - python predict.py --dataset bird --use-gpu=True --benchmark=log/WS-DAN/lite_train_lite_infer/norm_train_gpus_0 --batch-size=1     > log/WS-DAN/lite_train_lite_infer/python_infer_gpu_batchsize_1.log 2>&1 !
+Run successfully with command - python train.py --dataset bird_tiny --output-dir=output/=log/WS-DAN/lite_train_lite_infer/norm_train_gpus_0 --epochs=6   --batch-size=5!
+Run successfully with command - python eval.py --dataset bird_tiny  !
+Run successfully with command - python export_model.py --model bird    ! 
+Run successfully with command - python infer.py --img-path datasets/CUBTINY/3.jpg --use-gpu=True --benchmark=log/WS-DAN/lite_train_lite_infer/norm_train_gpus_0 --batch-size=1     > log/WS-DAN/lite_train_lite_infer/python_infer_gpu_batchsize_1.log 2>&1 !
 ```
