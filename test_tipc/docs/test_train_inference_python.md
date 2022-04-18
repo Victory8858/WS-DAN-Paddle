@@ -15,7 +15,7 @@ Linux端基础训练推理功能测试的主程序为`test_train_inference_pytho
 
 | 算法名称 | 模型名称 | 模型类型 | device | batchsize | tensorrt | mkldnn | cpu多线程 |
 | :------: | :------: | -------- | :----: | :-------: | :------: | :----: | :-------: |
-|  WS-DAN  |  WS-DAN  | 正常模型 |  GPU   |    1/1    |    -     |   -    |     -     |
+|  WS-DAN  |  WS-DAN  | 正常模型 |  GPU   |     1     |    -     |   -    |     -     |
 
 
 ## 2. 测试流程
@@ -48,14 +48,19 @@ bash test_tipc/test_train_inference_python.sh ${your_params_file} lite_train_who
 bash test_tipc/test_train_inference_python.sh test_tipc/configs/WS-DAN/train_infer_python.txt  lite_train_lite_infer
 ```
 
-log种输出结果如下，表示命令运行成功。
+log中输出结果如下，表示命令运行成功。
 
 ```
-Run successfully with command - python train.py --output-dir=output/=log/WS-DAN/lite_train_lite_infer/norm_train_gpus_0 --epochs=6   --batch-size=5!  
-Run successfully with command - python eval.py --dataset bird_tiny  !  
-Run successfully with command - python export_model.py --model bird    !  
-Run successfully with command - python predict.py --dataset bird --use-gpu=True --benchmark=log/WS-DAN/lite_train_lite_infer/norm_train_gpus_0 --batch-size=1     > log/WS-DAN/lite_train_lite_infer/python_infer_gpu_batchsize_1.log 2>&1 !
+Run successfully with command - python train.py --dataset bird_tiny --output-dir=output/=log/WS-DAN/lite_train_lite_infer/norm_train_gpus_0 --epochs=6   --batch-size=5!
+Run successfully with command - python eval.py --dataset bird_tiny  !
+Run successfully with command - python export_model.py --model bird    ! 
+Run successfully with command - python infer.py --img-path datasets/CUBTINY/3.jpg --use-gpu=True --benchmark=log/WS-DAN/lite_train_lite_infer/norm_train_gpus_0 --batch-size=1     > log/WS-DAN/lite_train_lite_infer/python_infer_gpu_batchsize_1.log 2>&1 !
 ```
+TIPC结果：
+
+<div align="center">
+    <img src="./tipc.jpg" width=800">
+</div>
 
 ## 3. 更多教程
 

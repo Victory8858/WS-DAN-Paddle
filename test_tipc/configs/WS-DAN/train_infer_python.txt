@@ -24,7 +24,7 @@ norm_export:export_model.py --model bird
 null:null
 infer_export:export_model.py --model bird_tiny
 ##
-inference:predict.py --dataset bird
+inference:infer.py --img-path datasets/CUBTINY/3.jpg
 --use-gpu:True
 --batch-size:1
 --benchmark:True

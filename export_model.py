@@ -21,11 +21,10 @@ from models.wsdan import WSDAN
 def parse_args():
     parser = argparse.ArgumentParser(description='Fined-Grained Classification')
     parser.add_argument("--model", default="bird", type=str, help="bird, car, aircraft, bird_tiny")
-    parser.add_argument("--input_size", default=(448, 448), type=tuple)
-    parser.add_argument('--save_dir', default='output', type=str, help='The directory for saving the exported model')
+    parser.add_argument("--input-size", default=(448, 448), type=tuple)
+    parser.add_argument('--save-dir', default='output', type=str, help='The directory for saving the exported model')
 
     return parser.parse_args()
-
 
 def main(args):
     # model
@@ -46,7 +45,7 @@ def main(args):
     print('Loaded trained params of model successfully.')
     model.eval()
 
-    model = paddle.jit.to_static(model, input_spec=[paddle.static.InputSpec(shape=[None, 3, 448, 448], dtype="float32")])
+    model = paddle.jit.to_static(model, input_spec=[paddle.static.InputSpec(shape=[1, 3, 448, 448], dtype="float32")])
     # save inference model
     paddle.jit.save(model, os.path.join(args.save_dir, "inference"))
     print(

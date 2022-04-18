@@ -13,7 +13,9 @@
   
     - [5.1 模型训练](#51)
     - [5.2 模型预测](#52)
-    - [5.3 单张图片预测](#52)
+    - [5.3 单张图片预测](#53)
+    - [5.4 模型导出(动转静)](#54)
+    - [5.5 模型推理(inference)](#55)
 - [6. 自动化测试脚本](#6)
 - [7. LICENSE](#7)
 - [8. 参考链接与文献](#8)
@@ -137,6 +139,7 @@ WS-DAN-Paddle-Victory8858
 ├── val.sh       # 模型测试启动脚本
 ├── predicted.py # 单张图片预测
 ├── export_model.py  # 模型动转静
+├── infer.py     # 利用静态模型进行推理
 ├── utils.py     # 工具链
 └── imgs         # Markdown 图片资源
 ```
@@ -203,14 +206,41 @@ python predict.py --dataset aircraft  # Options: bird, car, aircraft
     <img src="imgs/aircraft_predict.jpg" width=800">
 </div>
 
+<a name="54"></a>
+
+### 5.4 模型导出
+export_model.py为模型导出文件，可以将训练好的`*.pdparams`模型进行动转静，运行方式如下：
+其中`model`的值可为bird、car、aircraft、bird_tiny，`save_dir`为转换模型的保存路径
+
+```shell
+python export_model.py --model "bird" --save-dir "output"
+```
+
+
+<a name="55"></a>
+
+### 5.5 模型推理(inference)
+infer.py为模型推理文件，输入一张图片利用静态模型进行推理，得到图片类别和其对应概率，本文件在TIPC中会用到，若输入CUBTINY数据集中的`3.jpg`，其推理结果如下图所示，`class_id`代表类别，`prob`代表对应概率值
+
+<div align="center">
+    <img src="imgs/infer.jpg" width=800">
+</div>
+
+您可通过如下方式运行：
+
+
+```shell
+python infer.py --img-path datasets/CUBTINY/3.jpg  # 可更换为CUBTINY中存在的图片（1-5.jpg）
+```
+
 <a name="6"></a>
 
 ## 6. TIPC自动化测试脚本
 
-TIPC命令如下:
+TIPC命令如下，执行完后根目录内会生成output，log文件夹，其中output为保存的模型，log为运行结果的日志，详见TIPC文档:
 
 ```shell
-bash test_tipc/test_train_inference_python.sh test_tipc/configs/WSDAN/train_infer_python.txt lite_train_lite_infer
+bash test_tipc/test_train_inference_python.sh test_tipc/configs/WS-DAN/train_infer_python.txt lite_train_lite_infer
 ```
 
 <a name="7"></a>
